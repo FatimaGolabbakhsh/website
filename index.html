@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book & Movie Recommendations</title>
+    <title>Best of Everything</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #181c2f 0%, #232946 100%);
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
         }
         .container {
             max-width: 900px;
             margin: 40px auto;
-            background: rgba(22, 33, 62, 0.97);
+            background: rgba(28, 32, 48, 0.98);
             border-radius: 16px;
             box-shadow: 0 4px 24px #000a;
             padding: 40px 32px 32px 32px;
@@ -23,414 +23,120 @@
         }
         h1 {
             text-align: center;
-            color: #ffd369;
+            color: #ff006e;
             font-size: 2.5em;
             letter-spacing: 2px;
             margin-bottom: 8px;
             text-shadow: 0 2px 8px #0008;
         }
         h2 {
-            color: #ffd369;
             margin-top: 36px;
             margin-bottom: 10px;
             font-size: 1.5em;
             letter-spacing: 1px;
             text-shadow: 0 1px 4px #0006;
+            cursor: pointer;
+            transition: color 0.2s;
         }
+        /* Section-specific colors */
+        h2[onclick*='music-list'] { color: #257a99; }
+        h2[onclick*='movie-list'] { color: #bfa600; }
+        h2[onclick*='show-list'] { color: #4a5a7c; }
+        h2[onclick*='anime-list'] { color: #b23c5a; }
+        h2[onclick*='book-list'] { color: #2e7d5a; }
+        h2[onclick*='game-list'] { color: #b8860b; }
+        /* Section-specific colors for headers and titles */
+        h2[onclick*='music-list'], #music-list .title { color: #6dd3fa; }
+        h2[onclick*='movie-list'], #movie-list .title { color: #ffd369; }
+        h2[onclick*='show-list'], #show-list .title { color: #b8c1ec; }
+        h2[onclick*='anime-list'], #anime-list .title { color: #ff6f91; }
+        h2[onclick*='book-list'], #book-list .title { color: #a3f7bf; }
+        h2[onclick*='game-list'], #game-list .title { color: #fbb13c; }
         ul {
             list-style: none;
             padding: 0;
         }
         li {
             margin: 18px 0;
-            padding: 16px 18px 16px 60px;
-            background: rgba(44, 62, 80, 0.85);
+            padding: 16px 18px 16px 18px;
+            background: #232946;
             border-radius: 8px;
-            position: relative;
-            min-height: 60px;
+            min-height: 40px;
             box-shadow: 0 2px 8px #0003;
         }
+        /* Section-specific backgrounds for list items */
+        #music-list li { background: #233b4d; border-left: 6px solid #6dd3fa; }
+        #movie-list li { background: #3a2e1f; border-left: 6px solid #ffd369; }
+        #show-list li { background: #232a3d; border-left: 6px solid #b8c1ec; }
+        #anime-list li { background: #3d2330; border-left: 6px solid #ff6f91; }
+        #book-list li { background: #233d2e; border-left: 6px solid #a3f7bf; }
+        #game-list li { background: #3d3523; border-left: 6px solid #fbb13c; }
         .title {
-            font-size: 1.2em;
-            color: #ffd369;
+            font-size: 1.1em;
             font-weight: bold;
-        }
-        .genre {
-            font-style: italic;
-            color: #b8c1ec;
         }
         .desc {
             margin-top: 6px;
-        }
-        form {
-            margin: 32px 0;
-            background: rgba(26, 26, 46, 0.95);
-            padding: 18px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #0004;
-        }
-        label {
-            display: block;
-            margin: 8px 0 4px;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-            border: none;
-            margin-bottom: 12px;
-            background: #232946;
-            color: #fff;
-        }
-        button {
-            background: #ffd369;
-            color: #232946;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background: #b8c1ec;
-            color: #232946;
-        }
-        /* Thematic icons for each section */
-        .section-icon {
-            position: absolute;
-            left: 18px;
-            top: 18px;
-            font-size: 2em;
-            opacity: 0.7;
-        }
-        /* Section header icons */
-        .header-icon {
-            margin-right: 10px;
-            font-size: 1.2em;
-            vertical-align: middle;
-        }
-        /* Spinner styling for the game */
-        #spinner {
-            margin: 24px auto 0;
-            width: 120px;
-            height: 120px;
-            border: 8px solid #ffd369;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            color: #232946;
-            background: #b8c1ec;
-            box-shadow: 0 2px 8px #0004;
-            display: none;
-        }
-        /* Wheel label styling */
-        #wheel-canvas-labels {
-            position: absolute;
-            top: 0; left: 0;
-            width: 320px; height: 320px;
-            pointer-events: none;
-        }
-        .wheel-label {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform-origin: 0 0;
-            font-size: 1em;
-            font-weight: bold;
-            color: #232946;
-            background: rgba(255,255,255,0.85);
-            border-radius: 6px;
-            padding: 2px 10px;
-            white-space: nowrap;
-            box-shadow: 0 1px 4px #0002;
+            color: #b8c1ec;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Book & Movie Recommendations</h1>
-        <h2 style="cursor:pointer;" onclick="toggleSection('book-list')">Books &#9660;</h2>
-        <ul id="book-list" style="display:none;"></ul>
-        <form id="add-book-form" style="display:none; margin-bottom: 0;">
-            <label for="book-title">Add a Book:</label>
-            <input type="text" id="book-title" required placeholder="Book Title">
-            <label for="book-genre">Genre:</label>
-            <input type="text" id="book-genre" required placeholder="Genre">
-            <button type="submit">Add Book</button>
-        </form>
-        <h2 style="cursor:pointer;" onclick="toggleSection('movie-list')">Movies &#9660;</h2>
-        <ul id="movie-list" style="display:none;"></ul>
-        <form id="add-movie-form" style="display:none; margin-bottom: 0;">
-            <label for="movie-title">Add a Movie:</label>
-            <input type="text" id="movie-title" required placeholder="Movie Title">
-            <label for="movie-genre">Genre:</label>
-            <input type="text" id="movie-genre" required placeholder="Genre">
-            <button type="submit">Add Movie</button>
-        </form>
-        <h2 style="cursor:pointer;" onclick="toggleSection('tv-list')">Shows &#9660;</h2>
-        <ul id="tv-list" style="display:none;"></ul>
-        <form id="add-tv-form" style="display:none; margin-bottom: 0;">
-            <label for="tv-title">Add a TV Show:</label>
-            <input type="text" id="tv-title" required placeholder="TV Show Title">
-            <label for="tv-genre">Genre:</label>
-            <input type="text" id="tv-genre" required placeholder="Genre">
-            <button type="submit">Add TV Show</button>
-        </form>
-        <h2 style="cursor:pointer;" onclick="toggleSection('chance-game')">Game of Chance: What Should I Watch or Read? 🎲</h2>
-        <div id="chance-game" style="display:none; margin-bottom:32px;">
-            <label for="category-select">Choose a category:</label>
-            <select id="category-select">
-                <option value="book-list">Book</option>
-                <option value="movie-list">Movie</option>
-                <option value="tv-list">TV Show</option>
-            </select>
-            <button id="spin-btn">Spin the Wheel!</button>
-            <div id="wheel-container" style="margin: 32px auto 0; width: 480px; height: 480px; position: relative; display: none;">
-                <canvas id="wheel-canvas" width="480" height="480" style="border-radius: 50%; box-shadow: 0 2px 12px #0008;"></canvas>
-                <div id="wheel-canvas-labels" style="width:480px;height:480px;"></div>
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2.5em;color:#ffd369;pointer-events:none;">▼</div>
-            </div>
-            <div id="random-result" style="margin-top:18px; font-size:1.1em; color:#eebbc3;"></div>
-        </div>
+        <h1><span style="color:#ff006e;">Best</span> <span style="color:#ffd369;">of Everything</span></h1>
+        <h2 onclick="toggleSection('music-list')">Best Music &#127925;</h2>
+        <ul id="music-list" style="display:none;">
+            <li><span class="title">Bohemian Rhapsody</span> <div class="desc">Queen's epic rock opera masterpiece.</div></li>
+            <li><span class="title">Imagine</span> <div class="desc">John Lennon's timeless call for peace.</div></li>
+            <li><span class="title">Billie Jean</span> <div class="desc">Michael Jackson's iconic pop hit.</div></li>
+            <li><span class="title">Stairway to Heaven</span> <div class="desc">Led Zeppelin's legendary classic rock anthem.</div></li>
+            <li><span class="title">Hey Jude</span> <div class="desc">The Beatles' uplifting singalong classic.</div></li>
+        </ul>
+        <h2 onclick="toggleSection('movie-list')">Best Movies &#127909;</h2>
+        <ul id="movie-list" style="display:none;">
+            <li><span class="title">The Shawshank Redemption</span> <div class="desc">A story of hope and friendship in prison.</div></li>
+            <li><span class="title">The Godfather</span> <div class="desc">The saga of the Corleone crime family.</div></li>
+            <li><span class="title">Inception</span> <div class="desc">A mind-bending journey through dreams.</div></li>
+            <li><span class="title">Forrest Gump</span> <div class="desc">The extraordinary life of a simple man.</div></li>
+            <li><span class="title">Spirited Away</span> <div class="desc">A magical adventure in a spirit world.</div></li>
+        </ul>
+        <h2 onclick="toggleSection('show-list')">Best Shows &#128250;</h2>
+        <ul id="show-list" style="display:none;">
+            <li><span class="title">Breaking Bad</span> <div class="desc">A chemistry teacher turns to crime.</div></li>
+            <li><span class="title">Game of Thrones</span> <div class="desc">Epic battles for the Iron Throne.</div></li>
+            <li><span class="title">Stranger Things</span> <div class="desc">Kids face supernatural mysteries in the 80s.</div></li>
+            <li><span class="title">Friends</span> <div class="desc">Six friends navigate life in New York City.</div></li>
+            <li><span class="title">The Office</span> <div class="desc">A hilarious look at office life.</div></li>
+        </ul>
+        <h2 onclick="toggleSection('anime-list')">Best Animes &#127916;</h2>
+        <ul id="anime-list" style="display:none;">
+            <li><span class="title">Fullmetal Alchemist: Brotherhood</span> <div class="desc">Two brothers use alchemy to restore their bodies.</div></li>
+            <li><span class="title">Attack on Titan</span> <div class="desc">Humanity fights for survival against Titans.</div></li>
+            <li><span class="title">Death Note</span> <div class="desc">A notebook grants the power over life and death.</div></li>
+            <li><span class="title">One Piece</span> <div class="desc">Pirates search for the ultimate treasure.</div></li>
+            <li><span class="title">Naruto</span> <div class="desc">A ninja's journey to become Hokage.</div></li>
+        </ul>
+        <h2 onclick="toggleSection('book-list')">Best Books &#128218;</h2>
+        <ul id="book-list" style="display:none;">
+            <li><span class="title">To Kill a Mockingbird</span> <div class="desc">A story of justice and childhood in the Deep South.</div></li>
+            <li><span class="title">1984</span> <div class="desc">A dystopian vision of a totalitarian future.</div></li>
+            <li><span class="title">The Hobbit</span> <div class="desc">A hobbit's adventure to reclaim a lost kingdom.</div></li>
+            <li><span class="title">Pride and Prejudice</span> <div class="desc">A witty romance in 19th-century England.</div></li>
+            <li><span class="title">The Great Gatsby</span> <div class="desc">A critique of the American Dream in the 1920s.</div></li>
+        </ul>
+        <h2 onclick="toggleSection('game-list')">Best Games &#127918;</h2>
+        <ul id="game-list" style="display:none;">
+            <li><span class="title">The Legend of Zelda: Breath of the Wild</span> <div class="desc">An open-world adventure in Hyrule.</div></li>
+            <li><span class="title">The Witcher 3: Wild Hunt</span> <div class="desc">A monster hunter's epic journey.</div></li>
+            <li><span class="title">Minecraft</span> <div class="desc">A sandbox world of endless creativity.</div></li>
+            <li><span class="title">Red Dead Redemption 2</span> <div class="desc">An outlaw's story in the dying Wild West.</div></li>
+            <li><span class="title">Super Mario Odyssey</span> <div class="desc">Mario's globe-trotting 3D adventure.</div></li>
+        </ul>
     </div>
     <script>
-        function renderList(listId, items) {
-            const ul = document.getElementById(listId);
-            ul.innerHTML = '';
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="title">${item.title}</span> <span class="genre">(${item.genre})</span><div class="desc">${getSummary(item.title, listId)}</div>`;
-                ul.appendChild(li);
-            });
-        }
-        // Initial lists with genres
-        const initialBooks = [
-            { title: 'To Kill a Mockingbird', genre: 'Classic, Drama' },
-            { title: '1984', genre: 'Dystopian, Sci-Fi' },
-            { title: 'The Hobbit', genre: 'Fantasy, Adventure' },
-            { title: 'Pride and Prejudice', genre: 'Classic, Romance' },
-            { title: 'The Great Gatsby', genre: 'Classic, Tragedy' },
-            { title: "Harry Potter and the Sorcerer's Stone", genre: 'Fantasy, Adventure' },
-            { title: 'The Catcher in the Rye', genre: 'Classic, Coming-of-Age' },
-            { title: 'The Fellowship of the Ring', genre: 'Fantasy, Adventure' },
-            { title: 'The Alchemist', genre: 'Adventure, Philosophy' },
-            { title: 'Moby-Dick', genre: 'Classic, Adventure' }
-        ];
-        const initialMovies = [
-            { title: 'Inception', genre: 'Sci-Fi, Thriller' },
-            { title: 'The Shawshank Redemption', genre: 'Drama' },
-            { title: 'The Godfather', genre: 'Crime, Drama' },
-            { title: 'The Dark Knight', genre: 'Action, Crime, Drama' },
-            { title: 'Forrest Gump', genre: 'Drama, Romance' },
-            { title: 'Pulp Fiction', genre: 'Crime, Drama' },
-            { title: 'The Matrix', genre: 'Sci-Fi, Action' },
-            { title: 'Spirited Away', genre: 'Animation, Fantasy' },
-            { title: 'Parasite', genre: 'Thriller, Drama' },
-            { title: 'The Grand Budapest Hotel', genre: 'Comedy, Adventure' }
-        ];
-        const initialTV = [
-            { title: 'Breaking Bad', genre: 'Crime, Drama, Thriller' },
-            { title: 'Stranger Things', genre: 'Sci-Fi, Horror, Mystery' },
-            { title: 'Game of Thrones', genre: 'Fantasy, Drama, Adventure' },
-            { title: 'Attack on Titan', genre: 'Anime, Action, Mystery' },
-            { title: 'Friends', genre: 'Comedy, Romance' },
-            { title: 'Death Note', genre: 'Anime, Thriller, Mystery' },
-            { title: 'The Office', genre: 'Comedy, Mockumentary' },
-            { title: 'Fullmetal Alchemist: Brotherhood', genre: 'Anime, Action, Adventure' },
-            { title: 'Sherlock', genre: 'Crime, Mystery, Drama' },
-            { title: 'One Piece', genre: 'Anime, Adventure, Comedy' }
-        ];
-        renderList('book-list', initialBooks);
-        renderList('movie-list', initialMovies);
-        renderList('tv-list', initialTV);
-        // Show form when section is open
         function toggleSection(id) {
             const section = document.getElementById(id);
-            const form = document.getElementById('add-' + id.replace('-list', '') + '-form');
-            if (section.style.display === 'none') {
-                section.style.display = 'block';
-                if (form) form.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-                if (form) form.style.display = 'none';
-            }
-        }
-        // Add book
-        document.getElementById('add-book-form').onsubmit = function(e) {
-            e.preventDefault();
-            const title = document.getElementById('book-title').value.trim();
-            const genre = document.getElementById('book-genre').value.trim();
-            if (title && genre) {
-                const ul = document.getElementById('book-list');
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="title">${title}</span> <span class="genre">(${genre})</span><div class="desc">${getSummary(title, 'book-list')}</div>`;
-                ul.appendChild(li);
-                document.getElementById('book-title').value = '';
-                document.getElementById('book-genre').value = '';
-            }
-        };
-        // Add movie
-        document.getElementById('add-movie-form').onsubmit = function(e) {
-            e.preventDefault();
-            const title = document.getElementById('movie-title').value.trim();
-            const genre = document.getElementById('movie-genre').value.trim();
-            if (title && genre) {
-                const ul = document.getElementById('movie-list');
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="title">${title}</span> <span class="genre">(${genre})</span><div class="desc">${getSummary(title, 'movie-list')}</div>`;
-                ul.appendChild(li);
-                document.getElementById('movie-title').value = '';
-                document.getElementById('movie-genre').value = '';
-            }
-        };
-        // Add TV show
-        document.getElementById('add-tv-form').onsubmit = function(e) {
-            e.preventDefault();
-            const title = document.getElementById('tv-title').value.trim();
-            const genre = document.getElementById('tv-genre').value.trim();
-            if (title && genre) {
-                const ul = document.getElementById('tv-list');
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="title">${title}</span> <span class="genre">(${genre})</span><div class="desc">${getSummary(title, 'tv-list')}</div>`;
-                ul.appendChild(li);
-                document.getElementById('tv-title').value = '';
-                document.getElementById('tv-genre').value = '';
-            }
-        };
-        // Automatic summary generator
-        function getSummary(title, listId) {
-            // Predefined summaries for known titles
-            const summaries = {
-                'To Kill a Mockingbird': 'A powerful story about racial injustice and childhood in the Deep South.',
-                '1984': 'A chilling vision of a totalitarian future where Big Brother watches all.',
-                'The Hobbit': 'Bilbo Baggins embarks on a quest to reclaim a lost dwarf kingdom from a dragon.',
-                'Pride and Prejudice': 'A witty and romantic tale of manners, marriage, and society in 19th-century England.',
-                'The Great Gatsby': 'A critique of the American Dream set in the Roaring Twenties.',
-                "Harry Potter and the Sorcerer's Stone": "The magical beginning of Harry Potter's journey at Hogwarts School of Witchcraft and Wizardry.",
-                'The Catcher in the Rye': "Holden Caulfield's journey through New York City as he grapples with growing up.",
-                'The Fellowship of the Ring': 'Frodo Baggins sets out on a perilous quest to destroy the One Ring.',
-                'The Alchemist': "A young shepherd's journey to find his personal legend and fulfill his dreams.",
-                'Moby-Dick': "Captain Ahab's obsessive quest to hunt the white whale, Moby-Dick.",
-                'Inception': 'A mind-bending thriller where a thief enters dreams to steal secrets and plant ideas.',
-                'The Shawshank Redemption': 'A story of hope and friendship between two prisoners over decades in Shawshank prison.',
-                'The Godfather': 'The powerful saga of the Corleone crime family in postwar America.',
-                'The Dark Knight': 'Batman faces his greatest psychological and physical tests against the Joker.',
-                'Forrest Gump': 'The extraordinary life journey of Forrest Gump, a man with a kind heart and simple mind.',
-                'Pulp Fiction': 'A nonlinear crime drama weaving together multiple stories in Los Angeles.',
-                'The Matrix': 'A computer hacker discovers the shocking truth about his reality and his role in the war against its controllers.',
-                'Spirited Away': 'A young girl enters a magical world and must find her way back while saving her parents.',
-                'Parasite': 'A darkly comedic thriller about class, deception, and survival in modern South Korea.',
-                'The Grand Budapest Hotel': 'A whimsical tale of a legendary hotel concierge and his adventures in a fictional European country.',
-                'Breaking Bad': 'A high school chemistry teacher turned methamphetamine producer partners with a former student in this gripping crime drama.',
-                'Stranger Things': 'A group of kids uncover supernatural mysteries and government secrets in their small town.',
-                'Game of Thrones': 'Noble families vie for control of the Iron Throne in the epic fantasy world of Westeros.',
-                'Attack on Titan': 'Humanity fights for survival against giant humanoid Titans in a post-apocalyptic world.',
-                'Friends': 'Six friends navigate life, love, and work in New York City.',
-                'Death Note': 'A high school student discovers a notebook with deadly powers, leading to a battle of wits with a genius detective.',
-                'The Office': 'A hilarious look at the daily lives of office employees at Dunder Mifflin Paper Company.',
-                'Fullmetal Alchemist: Brotherhood': "Two brothers use alchemy in their quest to find the Philosopher's Stone and restore their bodies after a failed ritual.",
-                'Sherlock': 'A modern update to the classic detective stories of Sherlock Holmes, set in contemporary London.',
-                'One Piece': 'Monkey D. Luffy and his pirate crew search for the ultimate treasure, the One Piece, in a world full of adventure and mystery.'
-            };
-            if (summaries[title]) return summaries[title];
-            // Fallback summary
-            if (listId === 'book-list') return 'A book worth checking out!';
-            if (listId === 'movie-list') return 'A movie worth watching!';
-            if (listId === 'tv-list') return 'A show worth watching!';
-            return '';
-        }
-        document.getElementById('spin-btn').onclick = function(e) {
-            e.preventDefault();
-            const category = document.getElementById('category-select').value;
-            const items = getListItems(category);
-            if (items.length === 0) {
-                document.getElementById('random-result').textContent = 'No items found in this category.';
-                return;
-            }
-            const options = items.map(li => li.querySelector('.title').textContent);
-            document.getElementById('wheel-container').style.display = 'block';
-            drawWheel(options);
-            document.getElementById('random-result').textContent = '';
-            spinWheel(options, function(selectedIndex) {
-                const chosen = items[selectedIndex].cloneNode(true);
-                const img = chosen.querySelector('img');
-                if (img) img.remove();
-                document.getElementById('random-result').innerHTML = '<strong>Your pick:</strong><br>' + chosen.innerHTML;
-            });
-        };
-        function getListItems(category) {
-            const list = document.getElementById(category);
-            return Array.from(list.querySelectorAll('li'));
-        }
-        function drawWheel(options, highlightIndex = -1) {
-            const canvas = document.getElementById('wheel-canvas');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, 480, 480);
-            const centerX = 240, centerY = 240, radius = 220;
-            const colors = [
-                '#ffd369', '#b8c1ec', '#f67280', '#6a89cc', '#38ada9', '#e17055', '#fdcb6e', '#00b894', '#e17055', '#a29bfe', '#fd79a8', '#00b894'
-            ];
-            const n = options.length;
-            // Draw wheel segments
-            for (let i = 0; i < n; i++) {
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, (2 * Math.PI * i) / n, (2 * Math.PI * (i + 1)) / n);
-                ctx.closePath();
-                ctx.fillStyle = (i === highlightIndex) ? '#232946' : colors[i % colors.length];
-                ctx.fill();
-            }
-            // Draw labels outside the canvas for readability
-            const labelsDiv = document.getElementById('wheel-canvas-labels');
-            labelsDiv.innerHTML = '';
-            for (let i = 0; i < n; i++) {
-                const angle = (2 * Math.PI * (i + 0.5)) / n - Math.PI / 2;
-                const label = document.createElement('div');
-                label.className = 'wheel-label';
-                label.textContent = options[i];
-                const labelRadius = 180;
-                const x = 240 + Math.cos(angle) * labelRadius;
-                const y = 240 + Math.sin(angle) * labelRadius;
-                label.style.left = x + 'px';
-                label.style.top = y + 'px';
-                label.style.transform = `translate(-50%, -50%) rotate(${angle * 180 / Math.PI}deg)`;
-                label.style.fontSize = '1.1em';
-                label.style.maxWidth = '160px';
-                label.style.textAlign = 'center';
-                if (i === highlightIndex) {
-                    label.style.background = '#ffd369';
-                    label.style.color = '#232946';
-                    label.style.boxShadow = '0 2px 8px #ffd36988';
-                }
-                labelsDiv.appendChild(label);
-            }
-        }
-        function spinWheel(options, callback) {
-            let angle = 0;
-            let speed = Math.random() * 0.2 + 0.35;
-            let deceleration = 0.995 + Math.random() * 0.002;
-            let frame = 0;
-            const n = options.length;
-            let highlightIndex = -1;
-            function animate() {
-                angle += speed;
-                speed *= deceleration;
-                if (speed < 0.01) {
-                    // Stop
-                    const selected = (n - Math.floor((angle / (2 * Math.PI)) * n) % n) % n;
-                    drawWheel(options, selected);
-                    callback(selected);
-                    return;
-                }
-                highlightIndex = (n - Math.floor((angle / (2 * Math.PI)) * n) % n) % n;
-                drawWheel(options, highlightIndex);
-                frame++;
-                requestAnimationFrame(animate);
-            }
-            animate();
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
         }
     </script>
 </body>

@@ -5,27 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best Music</title>
     <style>
-        body { background: linear-gradient(135deg, #181c2f 0%, #232946 100%); color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
-        .container { max-width: 700px; margin: 40px auto; background: #233b4d; border-radius: 16px; box-shadow: 0 4px 24px #000a; padding: 40px 32px; }
-        h1 { color: #6dd3fa; text-align: center; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 18px 0; padding: 16px 18px; background: #1a2a38; border-radius: 8px; }
-        .title { color: #6dd3fa; font-weight: bold; font-size: 1.1em; }
-        .desc { color: #b8c1ec; margin-top: 6px; }
-        a { color: #ffd369; text-decoration: none; display: block; margin-bottom: 24px; }
+        body { background: url('weeewoooo%20musiccc.jpg') no-repeat center center fixed, linear-gradient(135deg, #181c2f 0%, #232946 100%); background-size: cover; color: #aee6ff; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
+        .container { max-width: 900px; margin: 32px auto 32px auto; background: rgba(24,28,47,0.7); border-radius: 24px; box-shadow: 0 8px 32px #000a; padding: 48px 40px; position: relative; }
+        h1 { color: #2980b9; font-size: 2.8em; text-align: center; letter-spacing: 2px; margin-bottom: 32px; text-shadow: 0 4px 16px #000a, 0 1px 0 #232946; }
+        .music-grid { display: flex; gap: 64px; justify-content: stretch; align-items: flex-start; }
+        .music-col { flex: 1; min-width: 260px; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { margin: 32px 0; padding: 24px 22px; background: rgba(34, 44, 70, 0.65); border-radius: 14px; box-shadow: 0 2px 12px #0005; transition: transform 0.15s; }
+        li:hover { transform: translateY(-4px) scale(1.03); background: rgba(60, 90, 130, 0.7); }
+        .title { color: #aee6ff; font-weight: bold; font-size: 1.25em; text-shadow: 0 2px 8px #000a, 0 1px 0 #232946; letter-spacing: 1px; }
+        .desc { color: #aee6ff; font-size: 1em; background: none; padding: 0; border-radius: 0; display: block; margin-top: 8px; text-shadow: 0 2px 8px #000a, 0 1px 0 #232946; }
+        a { color: #aee6ff; text-decoration: none; display: block; margin-bottom: 32px; text-shadow: 0 2px 8px #000a, 0 1px 0 #232946; font-size: 1.1em; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html">&#8592; Back to Home</a>
         <h1>Best Music</h1>
-        <ul>
-            <li><span class="title">Espresso</span> <div class="desc">Sabrina Carpenter's catchy pop hit of the year.</div></li>
-            <li><span class="title">Beautiful Things</span> <div class="desc">Benson Boone's emotional ballad topping the charts.</div></li>
-            <li><span class="title">Fortnight (feat. Post Malone)</span> <div class="desc">Taylor Swift's latest collaboration making waves.</div></li>
-            <li><span class="title">Lose Control</span> <div class="desc">Teddy Swims' soulful anthem for 2025.</div></li>
-            <li><span class="title">Too Sweet</span> <div class="desc">Hozier's smooth and soulful new single.</div></li>
-        </ul>
+        <div class="music-grid">
+            <div class="music-col">
+                <ul>
+                    <li>
+                        <span class="title">Espresso</span><br>
+                        <span class="desc">Sabrina Carpenter's catchy pop hit of the year.</span>
+                    </li>
+                    <li>
+                        <span class="title">Beautiful Things</span><br>
+                        <span class="desc">Benson Boone's emotional ballad topping the charts.</span>
+                    </li>
+                    <li>
+                        <span class="title">Fortnight (feat. Post Malone)</span><br>
+                        <span class="desc">Taylor Swift's latest collaboration making waves.</span>
+                    </li>
+                    <li>
+                        <span class="title">Lose Control</span><br>
+                        <span class="desc">Teddy Swims' soulful anthem for 2025.</span>
+                    </li>
+                    <li>
+                        <span class="title">Too Sweet</span><br>
+                        <span class="desc">Hozier's smooth and soulful new single.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="music-col">
+                <ul>
+                    <li>
+                        <span class="title">Good Luck, Babe!</span><br>
+                        <span class="desc">Chappell Roan's viral pop sensation.</span>
+                    </li>
+                    <li>
+                        <span class="title">Saturn</span><br>
+                        <span class="desc">SZA's dreamy and introspective R&B track.</span>
+                    </li>
+                    <li>
+                        <span class="title">Lunch</span><br>
+                        <span class="desc">Billie Eilish's latest hit from her new album.</span>
+                    </li>
+                    <li>
+                        <span class="title">I Had Some Help</span><br>
+                        <span class="desc">Morgan Wallen and Post Malone's country-pop duet.</span>
+                    </li>
+                    <li>
+                        <span class="title">Stargazing</span><br>
+                        <span class="desc">Myles Smith's uplifting and melodic single.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 </html>

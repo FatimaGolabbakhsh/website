@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best Shows</title>
     <style>
-        body { background: linear-gradient(135deg, #181c2f 0%, #232946 100%); color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
-        .container { max-width: 700px; margin: 40px auto; background: #232a3d; border-radius: 16px; box-shadow: 0 4px 24px #000a; padding: 40px 32px; }
-        h1 { color: #b8c1ec; text-align: center; }
+        body { background: url('it%20wasnt%20not%20working.jpg') no-repeat center center fixed, linear-gradient(135deg, #2a1010 0%, #4a1a1a 100%); background-size: cover; color: #ffb3b3; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
+        .container { max-width: 700px; margin: 40px auto; background: rgba(60, 10, 10, 0.55); border-radius: 16px; box-shadow: 0 4px 24px #000a; padding: 40px 32px; }
+        h1 { color: #ff4d4d; text-align: center; text-shadow: 0 2px 8px #000a; }
         ul { list-style: none; padding: 0; }
-        li { margin: 18px 0; padding: 16px 18px; background: #1a1e2b; border-radius: 8px; }
-        .title { color: #b8c1ec; font-weight: bold; font-size: 1.1em; }
-        .desc { color: #ffd369; margin-top: 6px; }
+        li { margin: 18px 0; padding: 16px 18px; background: rgba(255, 77, 77, 0.18); border-radius: 10px; box-shadow: none; }
+        .title { color: #ff1a1a; font-weight: bold; font-size: 1.1em; text-shadow: 0 2px 8px #fff4, 0 1px 0 #a259e6; }
+        .desc { color: #ffb3b3; margin-top: 6px; text-shadow: 0 2px 8px #000a; }
         a { color: #ff6f91; text-decoration: none; display: block; margin-bottom: 24px; }
     </style>
 </head>
@@ -19,13 +19,22 @@
     <div class="container">
         <a href="index.html">&#8592; Back to Home</a>
         <h1>Best Shows</h1>
-        <ul>
-            <li><span class="title">The Last of Us (Season 2)</span> <div class="desc">The acclaimed adaptation continues with new dangers and drama.</div></li>
-            <li><span class="title">Bridgerton (Season 3)</span> <div class="desc">The romantic drama returns with more intrigue in Regency London.</div></li>
-            <li><span class="title">Stranger Things (Final Season)</span> <div class="desc">The beloved sci-fi series reaches its epic conclusion.</div></li>
-            <li><span class="title">House of the Dragon (Season 2)</span> <div class="desc">The Targaryen civil war heats up in this Game of Thrones prequel.</div></li>
-            <li><span class="title">The Bear (Season 3)</span> <div class="desc">Carmy's culinary journey continues in Chicago's restaurant scene.</div></li>
-        </ul>
+        <div style="display: flex; gap: 48px; justify-content: center;">
+            <ul style="flex: 1; min-width: 220px;">
+                <li><span class="title">The Last of Us (Season 2)</span> <div class="desc">The acclaimed adaptation continues with new dangers and drama.</div></li>
+                <li><span class="title">Bridgerton (Season 3)</span> <div class="desc">The romantic drama returns with more intrigue in Regency London.</div></li>
+                <li><span class="title">Stranger Things (Final Season)</span> <div class="desc">The beloved sci-fi series reaches its epic conclusion.</div></li>
+                <li><span class="title">House of the Dragon (Season 2)</span> <div class="desc">The Targaryen civil war heats up in this Game of Thrones prequel.</div></li>
+                <li><span class="title">The Bear (Season 3)</span> <div class="desc">Carmy's culinary journey continues in Chicago's restaurant scene.</div></li>
+            </ul>
+            <ul style="flex: 1; min-width: 220px;">
+                <li><span class="title">Wednesday (Season 2)</span> <div class="desc">The Addams Family's daughter returns for more dark adventures.</div></li>
+                <li><span class="title">Squid Game (Season 2)</span> <div class="desc">The high-stakes survival drama continues with new twists.</div></li>
+                <li><span class="title">Loki (Season 2)</span> <div class="desc">Marvel's trickster god faces new timelines and challenges.</div></li>
+                <li><span class="title">Only Murders in the Building (Season 4)</span> <div class="desc">The amateur sleuths tackle another mysterious case.</div></li>
+                <li><span class="title">Succession (Final Season)</span> <div class="desc">The Roy family's power struggle reaches its dramatic end.</div></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
